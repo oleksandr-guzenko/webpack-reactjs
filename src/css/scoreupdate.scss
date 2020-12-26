@@ -1,0 +1,65 @@
+.scorehandler-wrapper {
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	margin: 1rem 0;
+	input {
+		width: 100%;
+		line-height: 1.65;
+		display: block;
+		padding: 0;
+		text-align: center;
+		margin: 0;
+		border: 0.0625rem solid #eee;
+		&:focus {
+			outline: 0;
+		}
+	}
+}
+input[type=number] {
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	-moz-appearance: textfield;
+}
+.quantity-nav {
+	position: relative;
+	height: 3.625rem;
+}
+.quantity-button {
+	position: relative;
+	cursor: pointer;
+	border-left: 0.0625rem solid #eee;
+	width: 1.25rem;
+	text-align: center;
+	color: #333;
+	font-size: 0.8125rem;
+	line-height: 1.7;
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.quantity-button.quantity-up {
+	width: 2rem;
+	position: absolute;
+	height: 50%;
+	top: 0;
+	border: none;
+	border-bottom: 0.0625rem solid #eee;
+}
+.quantity-button.quantity-down {
+	width: 2rem;
+	border: none;
+	position: absolute;
+	bottom: 0;
+	height: 50%;
+}
