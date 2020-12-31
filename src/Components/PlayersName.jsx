@@ -4,15 +4,15 @@ import io from "socket.io-client";
 function PlayersName(props) {
   return (
     <>
-      <label htmlFor="name" >
-        {props.player}:
-        <input type="text" id="name" name="name" placeholder={`Team | ${props.player} name`} onChange={nameChangeHandler([props.player.toLowerCase(), props.mode], this)} />
+      <label htmlFor={props.player} >
+        {props.player}: 
+        <input type="text" id={props.player} name={props.player} placeholder={`Team | ${props.player} name`} onChange={NameChangeHandler([props.player.toLowerCase(), props.mode], this)} />
       </label>
     </>
   );
 }
 
-const nameChangeHandler = (args) => (event) => {
+const NameChangeHandler = (args) => (e) => {
   // logic with args, event
 
   const socket = io.connect(args[1]);
@@ -20,7 +20,7 @@ const nameChangeHandler = (args) => (event) => {
 
     const IOpackage = {
       playerID: args[0],
-      name: event.target.value
+      name: e.target.value
     }
     socket.emit('player', IOpackage)
   }
@@ -28,7 +28,7 @@ const nameChangeHandler = (args) => (event) => {
   else {
     const IOpackage = {
       playerID: args[0],
-      name: event.target.value
+      name: e.target.value
     }
     socket.emit('player', IOpackage)
   }

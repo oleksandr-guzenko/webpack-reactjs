@@ -67,6 +67,7 @@ class ScoreHandler extends Component {
     }
 
     if (player === "Player-2") {
+
       if (e.target.value === '+') {
         scoreP2++
         if (scoreP2 >= score) {
@@ -102,15 +103,16 @@ class ScoreHandler extends Component {
   }
 
   render() {
-      return (
-        <div className={`scorehandler-wrapper ${this.props.player}`}>
-          <input type="number" min={0} max={3} value={this.state.scoreP1} onChange={this.ChangeValue} />
-          <div className="quantity-nav">
-            <button type="button" className={`quantity-button quantity-up ${this.state.disablePlus ? 'btn-disabled' : ''}`} disabled={this.state.disablePlus} value="+" onClick={this.ChangeValue}>+</button>
-            <button type="button" className={`quantity-button quantity-down ${this.state.disableMinus ? 'btn-disabled' : ''}`} value="-" disabled={this.state.disableMinus} onClick={this.ChangeValue}>-</button>
-          </div>
+    return (
+      <div className={`scorehandler-wrapper ${this.props.player}`}>
+        {this.state.player === 'Player-1' && <input type="number" min={0} max={3} value={this.state.scoreP1} onChange={this.ChangeValue} />}
+        {this.state.player === 'Player-2' && <input type="number" min={0} max={3} value={this.state.scoreP2} onChange={this.ChangeValue} />}
+        <div className="quantity-nav">
+          <button type="button" className={`quantity-button quantity-up ${this.state.disablePlus ? 'btn-disabled' : ''}`} disabled={this.state.disablePlus} value="+" onClick={this.ChangeValue}>+</button>
+          <button type="button" className={`quantity-button quantity-down ${this.state.disableMinus ? 'btn-disabled' : ''}`} value="-" disabled={this.state.disableMinus} onClick={this.ChangeValue}>-</button>
         </div>
-      );
+      </div>
+    );
   }
 }
 

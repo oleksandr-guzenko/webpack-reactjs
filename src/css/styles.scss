@@ -1,3 +1,18 @@
-@import './reset.scss';
-@import './scoreupdate.scss';
-@import './loginForm.scss';
+@import "./fonts.scss";
+@import "./reset.scss";
+@import "./loginForm.scss";
+@import "./scoreupdate.scss";
+@import "./layout.scss";
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+body {
+  font-family: 'Dubai Regular';
+}

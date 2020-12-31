@@ -7,16 +7,24 @@ import {
 import NoMatch from './Pages/NoMatch';
 import Home from './Pages/Home';
 import AdminPanel from './Pages/AdminPanel';
+const env = process.env.NODE_ENV;
+let mode;
+if (env === 'development') {
+  mode = process.env.LOCALHOST
+}
+else {
+  mode = process.env.HOST
+}
 function App() {
   return (
     <main className="loader">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home mode={mode} />
           </Route>
           <Route exact path="/admin/panel">
-            <AdminPanel />
+            <AdminPanel mode={mode} />
           </Route>
           <Route path="*">
             <NoMatch />

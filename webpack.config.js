@@ -58,9 +58,9 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     new Webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-      }
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.LOCALHOST": JSON.stringify('localhost:5100'),
+      "process.env.HOST": JSON.stringify('https://xbox-socket-io.herokuapp.com')
     }),
   ],
   devServer: {

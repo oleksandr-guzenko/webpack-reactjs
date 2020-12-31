@@ -3,16 +3,6 @@ import PlayersName from './PlayersName';
 import PlayerCountry from './PlayerCountry';
 import ScoreUpdater from './ScoreUpdater';
 
-const env = process.env.NODE_ENV;
-
-let mode;
-if (env === 'development') {
-  mode = "localhost:5100";
-}
-else {
-  mode = `https://xbox-socket-io.herokuapp.com/`;
-}
-
 class BackendLayout extends Component {
 
   constructor(props) {
@@ -44,17 +34,17 @@ class BackendLayout extends Component {
     if (player === 'Player-1')
       return (
         <form className={player.toLowerCase()}>
-          <PlayersName mode={mode} player={player} />
-          <ScoreUpdater mode={mode} player={player} score={0} />
-          <PlayerCountry mode={mode} countriesData={countriesData} />
+          <PlayersName mode={this.props.mode} player={player} />
+          <ScoreUpdater mode={this.props.mode} player={player} score={0} />
+          <PlayerCountry mode={this.props.mode} player={player} countriesData={countriesData} />
         </form>
       );
     else {
       return (
         <form className={player.toLowerCase()}>
-          <PlayersName mode={mode} player={player} />
-          <ScoreUpdater mode={mode} player={player} score={0} />
-          <PlayerCountry mode={mode} player={player} countriesData={countriesData} />
+          <PlayersName mode={this.props.mode} player={player} />
+          <ScoreUpdater mode={this.props.mode} player={player} score={0} />
+          <PlayerCountry mode={this.props.mode} player={player} countriesData={countriesData} />
         </form>
       );
     }

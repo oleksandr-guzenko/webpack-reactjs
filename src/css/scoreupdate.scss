@@ -1,3 +1,18 @@
+.player-1-wrapper,
+.player-2-wrapper {
+	margin-top: 20px;
+}
+.player-1,
+.player-2 {
+	input {
+		margin-left: 10px;
+	}
+  display: flex;
+  flex-direction: column;
+	width: 500px;
+	margin: 0 auto;
+}
+
 .scorehandler-wrapper {
 	position: relative;
 	display: flex;
@@ -62,4 +77,15 @@ input[type=number] {
 	position: absolute;
 	bottom: 0;
 	height: 50%;
+}
+
+.round-text {
+	display: flex;
+	margin: 20px auto;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 500px;
+	#roundText {
+		margin-left: 10px;
+	}
 }
