@@ -28,6 +28,12 @@ function App() {
           <Route exact path="/admin/panel">
             <AdminPanel mode={mode} />
           </Route>
+          <Route exact path="/admin/panel/ft5">
+            <AdminPanel mode={mode} />
+          </Route>
+          <Route exact path="/admin/panel/ft10">
+            <AdminPanel mode={mode} />
+          </Route>
           <Route path="*">
             <NoMatch />
           </Route>
