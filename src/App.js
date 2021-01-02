@@ -11,9 +11,11 @@ const env = process.env.NODE_ENV;
 let mode;
 if (env === 'development') {
   mode = process.env.LOCALHOST
+  console.log(mode)
 }
 else {
   mode = process.env.HOST
+  console.log(mode)
 }
 function App() {
   return (

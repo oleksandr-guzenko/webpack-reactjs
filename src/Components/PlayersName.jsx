@@ -6,7 +6,7 @@ function PlayersName(props) {
     <>
       <label htmlFor={props.player} >
         {props.player}: 
-        <input type="text" id={props.player} name={props.player} placeholder={`Team | ${props.player} name`} onChange={NameChangeHandler([props.player.toLowerCase(), props.mode], this)} />
+        <input type="text" id={props.player} name={props.player} placeholder={`Team | ${props.player} name`} onChange={NameChangeHandler([props.player, props.mode], this)} />
       </label>
     </>
   );
@@ -16,7 +16,7 @@ const NameChangeHandler = (args) => (e) => {
   // logic with args, event
 
   const socket = io.connect(args[1]);
-  if (args[0] === 'player-1') {
+  if (args[0] === 'Player-1') {
 
     const IOpackage = {
       playerID: args[0],
