@@ -37,6 +37,7 @@
     "axios": "^0.21.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-numeric-input": "^2.2.3",
