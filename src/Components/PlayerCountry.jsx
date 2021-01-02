@@ -24,10 +24,10 @@ const CountryChangeHandler = (args) => (e) => {
   // logic with args, event
 
   const socket = io.connect(args[1]);
-  if (args[0].toLowerCase() === 'player-1') {
+  if (args[0] === 'Player-1') {
 
     const IOpackage = {
-      playerID: args[0].toLowerCase(),
+      playerID: args[0],
       country: e.target.value
     }
     socket.emit('player-country', IOpackage)
@@ -35,7 +35,7 @@ const CountryChangeHandler = (args) => (e) => {
 
   else {
     const IOpackage = {
-      playerID: args[0].toLowerCase(),
+      playerID: args[0],
       country: e.target.value
     }
     socket.emit('player-country', IOpackage)
