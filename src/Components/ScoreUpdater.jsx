@@ -1,119 +1,85 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
+function ScoreUpdater(props) {
 
-let scoreP1 = 0,
-  scoreP2 = 0;
+  const
+    socket = io.connect(props.mode),
+    [disablePlus, updateDisablePlus] = useState(false),
+    [disableMinus, updateDisableMinus] = useState(true),
+    [scoreP1, updateScoreP1] = useState(0),
+    [scoreP2, updateScoreP2] = useState(0),
+    [path] = useState(window.location.pathname),
+    player = props.player;
 
-class ScoreHandler extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      disablePlus: false,
-      disableMinus: true,
-      scoreP1: scoreP1,
-      scoreP2: scoreP2,
-      player: props.player,
-      path: window.location.pathname
-    };
+  let score;
+  if (path === '/admin/panel/ft5') {
+    score = 5;
+  }
+  else if (path === '/admin/panel/ft10') {
+    score = 10;
+  }
+  else {
+    score = 3;
   }
 
-  ChangeValue = (e) => {
-    const socket = io.connect(this.props.mode);
-    const { player } = this.state;
-    let score;
-    if (this.state.path === '/admin/panel/ft5') {
-      score = 5;
-    }
-    else if (this.state.path === '/admin/panel/ft10') {
-      score = 10;
-    }
-    else {
-      score = 3;
-    }
-    if (player === "Player-1") {
-      if (e.target.value === '+') {
-        scoreP1++
-
+  const ChangeValue = (e) => {
+    setTimeout(() => {
+      if (player === 'Player-1') {
         if (scoreP1 >= score) {
-          this.setState({
-            disablePlus: true,
-            disableMinus: false
-          })
+          updateDisablePlus(true);
+          updateDisableMinus(false);
         }
         else if (scoreP1 < 2 && scoreP1 > 0) {
-          this.setState({
-            disableMinus: false
-          })
+          updateDisableMinus(false);
         }
-        this.setState({
-          scoreP1: scoreP1
-        })
-        socket.emit('playerScore', { player, scoreP1 })
-      }
-      else if (e.target.value === '-') {
-        scoreP1--
+
         if (scoreP1 <= 0) {
-          this.setState({
-            disablePlus: false,
-            disableMinus: true
-          })
+          updateDisablePlus(false);
+          updateDisableMinus(true);
         }
-        this.setState({
-          scoreP1: scoreP1
-        })
+
         socket.emit('playerScore', { player, scoreP1 })
       }
-    }
-
-    if (player === "Player-2") {
-
-      if (e.target.value === '+') {
-        scoreP2++
+      if (player === 'Player-2') {
         if (scoreP2 >= score) {
-          this.setState({
-            disablePlus: true,
-            disableMinus: false
-          })
+          updateDisablePlus(true);
+          updateDisableMinus(false);
         }
         else if (scoreP2 < 2 && scoreP2 > 0) {
-          this.setState({
-            disableMinus: false
-          })
+          updateDisableMinus(false);
         }
-        this.setState({
-          scoreP2: scoreP2
-        })
-        socket.emit('playerScore', { player, scoreP2 })
-      }
-      else if (e.target.value === '-') {
-        scoreP2--
+
         if (scoreP2 <= 0) {
-          this.setState({
-            disablePlus: false,
-            disableMinus: true
-          })
+          updateDisablePlus(false);
+          updateDisableMinus(true);
         }
-        this.setState({
-          scoreP2: scoreP2
-        })
+
         socket.emit('playerScore', { player, scoreP2 })
       }
-    }
+    }, 10)
   }
 
-  render() {
-    return (
-      <div className={`scorehandler-wrapper ${this.props.player}`}>
-        {this.state.player === 'Player-1' && <input type="number" min={0} max={3} value={this.state.scoreP1} onChange={this.ChangeValue} />}
-        {this.state.player === 'Player-2' && <input type="number" min={0} max={3} value={this.state.scoreP2} onChange={this.ChangeValue} />}
+  useEffect(() => {
+  }, [ChangeValue()]);
+
+  return (
+    <div className={`scorehandler-wrapper ${props.player}`}>
+      {props.player === 'Player-1' && <input type="number" min={0} max={3} value={scoreP1} onChange={ChangeValue} />}
+      {props.player === 'Player-2' && <input type="number" min={0} max={3} value={scoreP2} onChange={ChangeValue} />}
+      {props.player === 'Player-1' &&
         <div className="quantity-nav">
-          <button type="button" className={`quantity-button quantity-up ${this.state.disablePlus ? 'btn-disabled' : ''}`} disabled={this.state.disablePlus} value="+" onClick={this.ChangeValue}>+</button>
-          <button type="button" className={`quantity-button quantity-down ${this.state.disableMinus ? 'btn-disabled' : ''}`} value="-" disabled={this.state.disableMinus} onClick={this.ChangeValue}>-</button>
+          <button type="button" className={`quantity-button quantity-up ${disablePlus ? 'btn-disabled' : ''}`} disabled={disablePlus} value="+" onClick={() => updateScoreP1(scoreP1 + 1)}>+</button>
+          <button type="button" className={`quantity-button quantity-down ${disableMinus ? 'btn-disabled' : ''}`} disabled={disableMinus} value="-" onClick={() => updateScoreP1(scoreP1 - 1)}>-</button>
         </div>
-      </div>
-    );
-  }
+      }
+      {props.player === 'Player-2' &&
+        <div className="quantity-nav">
+          <button type="button" className={`quantity-button quantity-up ${disablePlus ? 'btn-disabled' : ''}`} disabled={disablePlus} value="+" onClick={() => updateScoreP2(scoreP2 + 1)}>+</button>
+          <button type="button" className={`quantity-button quantity-down ${disableMinus ? 'btn-disabled' : ''}`} disabled={disableMinus} value="-" onClick={() => updateScoreP2(scoreP2 - 1)}>-</button>
+        </div>
+      }
+    </div>
+  );
 }
 
-export default ScoreHandler;
+export default ScoreUpdater;

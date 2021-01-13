@@ -1,54 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayersName from './PlayersName';
 import PlayerCountry from './PlayerCountry';
 import ScoreUpdater from './ScoreUpdater';
 
-class BackendLayout extends Component {
+function BackendLayout(props) {
+  const [countriesData, updateCountriesData] = useState([{}])
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      url: this.props.url,
-      countriesData: [{}],
-      player: this.props.player
-    }
-  }
-
-  getAllCountries = async (url) => {
+  const getAllCountries = async (url) => {
     let response = await url
     return await response
   }
 
-  componentDidMount() {
-    this.getAllCountries(this.state.url).then(res => {
-      this.setState({
-        countriesData: res.data
-      })
-    }).catch(issues => {
-      console.error(issues)
-    })
-  }
+  useEffect(() => {
+    getAllCountries(props.url).then(res => {
+      updateCountriesData(res.data)
+    }).catch(error => console.error(error))
+  }, []);
 
-  render() {
-    const { player, countriesData } = this.state
-    if (player === 'Player-1')
-      return (
-        <form className={player.toLowerCase()}>
-          <PlayersName mode={this.props.mode} player={player} />
-          <ScoreUpdater mode={this.props.mode} player={player} score={0} />
-          <PlayerCountry mode={this.props.mode} player={player} countriesData={countriesData} />
-        </form>
-      );
-    else {
-      return (
-        <form className={player.toLowerCase()}>
-          <PlayersName mode={this.props.mode} player={player} />
-          <ScoreUpdater mode={this.props.mode} player={player} score={0} />
-          <PlayerCountry mode={this.props.mode} player={player} countriesData={countriesData} />
-        </form>
-      );
-    }
-  }
+  return (
+    <form className={props.player.toLowerCase()}>
+      <PlayersName mode={props.mode} player={props.player} />
+      <ScoreUpdater mode={props.mode} player={props.player} score={0} />
+      <PlayerCountry mode={props.mode} player={props.player} countriesData={countriesData} />
+    </form>
+  )
 }
 
 export default BackendLayout;

@@ -7,17 +7,17 @@ import {
 import NoMatch from './Pages/NoMatch';
 import Home from './Pages/Home';
 import AdminPanel from './Pages/AdminPanel';
-const env = process.env.NODE_ENV;
-let mode;
-if (env === 'development') {
-  mode = process.env.LOCALHOST
-  console.log(mode)
-}
-else {
-  mode = process.env.HOST
-  console.log(mode)
-}
+
 function App() {
+  const env = process.env.NODE_ENV;
+  let mode;
+  if (env === 'development') {
+    mode = process.env.LOCALHOST
+  }
+  else {
+    mode = process.env.HOST
+  }
+
   return (
     <main className="loader">
       <Router>

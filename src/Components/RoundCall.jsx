@@ -1,68 +1,37 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from "socket.io-client";
 
-class RoundText extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mode: props.mode,
-      roundText: '',
-      roundTextValue: false
-    };
-  }
+function RoundCall(props) {
+  const
+    [roundText, updateRoundText] = useState(''), 
+    [roundTextBoolean, updateRoundTextBoolean] = useState(false),
+    socket = io.connect(props.mode);
 
-  componentDidMount = () => {
-    this.launchRoundText();
+  const launchRoundText = () => {
+    socket.emit('roundText', {roundText, roundTextBoolean})
   }
-
-  launchRoundText = () => {
-    const socket = io.connect(this.state.mode);
-    const IOPackage = {
-      roundTextValue: this.state.roundTextValue,
-      roundText: this.state.roundText
-    }
-    socket.emit('roundText', IOPackage)
-  }
-
-  changeRoundTextHandler = (e) => {
-    const socket = io.connect(this.state.mode);
+  
+  const changeRoundTextHandler = (e) => {
     if (e.target.value === '') {
-      this.setState({
-        roundTextValue: false,
-        roundText: ''
-      }, () => {
-        const IOPackage = {
-          roundTextValue: this.state.roundTextValue,
-          roundText: this.state.roundText
-        }
-        socket.emit('roundText', IOPackage)
-      })
+      updateRoundText('');
+      updateRoundTextBoolean(false)
     }
     else {
-      this.setState({
-        roundTextValue: true,
-        roundText: e.target.value
-      }, () => {
-
-        const IOPackage = {
-          roundTextValue: this.state.roundTextValue,
-          roundText: this.state.roundText
-        }
-        socket.emit('roundText', IOPackage)
-
-      })
+      updateRoundText(e.target.value);
+      updateRoundTextBoolean(true)
     }
-
   }
 
-  render() {
-    return (
-      <div className="round-text">
-        <label htmlFor="roundText">Round Text: </label>
-        <input id="roundText" type="text" value={this.state.roundText} onChange={this.changeRoundTextHandler} placeholder="Ex: Losers Final" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    launchRoundText()
+  }, [roundText]);
+
+  return (
+    <div className="round-text">
+      <label htmlFor="roundText">Round Text: </label>
+      <input id="roundText" type="text" value={roundText} onChange={changeRoundTextHandler} placeholder="Ex: Losers Final" />
+    </div>
+  );
 }
 
-export default RoundText;
+export default RoundCall;

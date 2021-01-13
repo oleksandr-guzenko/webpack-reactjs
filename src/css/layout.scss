@@ -1,66 +1,121 @@
 .layout {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  width: 90%;
+  width: 1800px;
   margin: 0 auto;
-  overflow: hidden;
-  .Player-1,
-  .Player-2 {
-    background: rgba(0,0,0,0.5);
-
-    img {
-      width: 50px;
-    }
-    justify-content: center;
-    align-items: center;
-    display: flex;
+  position: relative;
+  height: 40px;
+  .overlay {
+    position: fixed;
+    width: 540px;
+    height: 40px;
+    z-index: 1;
   }
-
-  .Player-1 {
-    border-bottom-left-radius: 10px;
-    .P1-score {
-      border-left: 2px solid #fff;
-      margin-left: 10px;
-      padding: 0 10px;
-    }
-    img {
-      margin-right: 10px;
-    }
-  }
-
-  .Player-2 {
-    border-bottom-right-radius: 10px;
-    .P2-score {
-      border-right: 2px solid #fff;
-      margin-right: 10px;
-      padding: 0 10px;
-    }
-    img {
-      margin-left: 10px;
-    }
-  }
-
-  .Rounds {
-    h3 {
-      transform: rotate(180deg);
-      padding-bottom: 45px;
-      position: relative;
-      top: 80px;
-    }
-    transform: rotate(180deg);
-    border-bottom: 100px solid rgba(0,0,0,0.5);
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-  }
-
-
   .Player-1,
   .Player-2,
   .Rounds {
     color: #fff;
-    padding: 10px;
-    font-size: 40px;
- 
+    z-index: 2;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    font-size: 30px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
+  }
+
+  .Rounds {
+    left: 50%;
+    top: 50%;
+    width: 540px;
+    transform: translate(-50%,-50%);
+    background: url("../img/shape.png") repeat;
+    background-size: 25px;
+    h3 {
+      text-align: center;
+      padding-top: 5px;
+    }
+    > .overlay {
+      background: rgba(180, 145, 200, 0.5);
+    }
+  }
+
+  .Player-1 {
+    > .overlay {
+      background: rgba(124, 82, 149, 0.5);
+    }
+    width: 540px;
+    background: url("../img/shape.png") repeat;
+    background-size: 25px;
+    left: 0;
+    overflow: hidden;
+    &.skew {
+      transform: skew(125deg);
+    }
+
+    .P1-name,
+    .P1-country,
+    .P1-score {
+      position: absolute;
+    }
+
+    .P1-score {
+      left: 500px;
+      top: 50%;
+      transform: skew(55deg) translateY(-50%);
+    }
+
+    .P1-country {
+      left: 40px;
+      transform: skew(55deg);
+      img {
+        width: 40px;
+        object-fit: cover;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+    .P1-name {
+      top: 50%;
+      left: 120px;
+      transform: skew(55deg) translateY(-50%);
+    }
+  }
+  .Player-2 {
+    > .overlay {
+      background: rgba(188, 160, 220, 0.5);
+    }
+    width: 540px;
+    background: url("../img/shape.png") repeat;
+    background-size: 25px;
+    right: 0;
+    overflow: hidden;
+    &.skew {
+      transform: skew(-125deg);
+    }
+
+    .P2-name,
+    .P2-country,
+    .P2-score {
+      position: absolute;
+    }
+    .P2-score {
+      right: 500px;
+      top: 50%;
+      transform: skew(-55deg) translateY(-50%);
+    }
+
+    .P2-country {
+      right: 40px;
+      transform: skew(-55deg);
+      img {
+        width: 40px;
+        object-fit: cover;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+    .P2-name {
+      top: 50%;
+      right: 120px;
+      transform: skew(-55deg) translateY(-50%);
+    }
   }
 }

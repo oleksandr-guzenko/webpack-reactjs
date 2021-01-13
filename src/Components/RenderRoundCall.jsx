@@ -1,33 +1,22 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from "socket.io-client";
 
-class RenderRoundCall extends Component {
-  constructor(props) {
-    super(props);
+function RenderRoundCall(props) {
+  const
+    [roundText, updateRoundText] = useState(''),
+    socket = io.connect(props.mode);
 
-    this.state = {
-      roundText: '',
-      roundTextValue: '',
-      mode: props.mode
-    };
-  }
-
-  componentDidMount = () => {
-    const socket = io.connect(this.state.mode);
-    socket.on("roundCallText", (roundCallPackage) => {
-      this.setState({
-        roundText: roundCallPackage.roundText,
-        roundTextValue: roundCallPackage.roundTextValue
-      })
+  useEffect(() => {
+    socket.on("roundCallText", ({roundText}) => {
+      updateRoundText(roundText)
     })
-  }
-  render() {
-    const { roundText } = this.state
-    return (
-      <>
-        <h3>{roundText}</h3>
-      </>
-    )
-  }
+  }, []);
+  
+  return (
+    <>
+      <h3>{roundText}</h3>
+    </>
+  )
 }
+
 export default RenderRoundCall;

@@ -1,70 +1,50 @@
-
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
 
-class RenderPlayer1Score extends Component {
-  constructor(props) {
-    super(props);
+function RenderPlayer1Score(props) {
 
-    this.state = {
-      swap: true,
-      scoreP1: '',
-      scoreP2: '',
-      mode: props.mode
-    };
-  }
+  const
+    socket = io.connect(props.mode),
+    [swapPlace, updateSwapPlace] = useState(true),
+    [p1Score, updateScoreP1] = useState(0),
+    [p2Score, updateScoreP2] = useState(0);
 
-  componentDidMount = () => {
-    const socket = io.connect(this.state.mode);
+  useEffect(() => {
     socket.on("swap-place", (swap) => {
-      this.setState({
-        swap: swap
-      })
+      updateSwapPlace(swap)
     })
 
-    socket.on("player1Score", ({ scoreP1 }) => {
-  
-      this.setState({
-        scoreP1: scoreP1
-      })
+    socket.on("player1Score", (scoreP1) => {
+      updateScoreP1(scoreP1)
     })
 
-    socket.on("player2Score", ({ scoreP2 }) => {
-      this.setState({
-        scoreP2: scoreP2
-      })
+    socket.on("player2Score", (scoreP2) => {
+      updateScoreP2(scoreP2)
     })
-  }
 
-  RenderScoreOfPlayer = (scoreP1, scoreP2) => {
+  }, []);
 
-    const { swap } = this.state;
-    if (swap) {
-      if (scoreP1 === '') {
+
+  const RenderScoreOfPlayer = (playersScore) => {
+    if (swapPlace) {
+      if (playersScore[0] === '') {
         return <h3>0</h3>
       }
-      return (
-        <h3>{this.state.scoreP1}</h3>
-      )
+      return <h3>{playersScore[0]}</h3>
     }
-    else if (swap === false) {
-      if (scoreP2 === '') {
+    else if (swapPlace === false) {
+      if (playersScore[1] === '') {
         return <h3>0</h3>
       }
-      return (
-        <h3>{this.state.scoreP2}</h3>
-      )
+      return <h3>{playersScore[1]}</h3>
     }
   }
 
-  render() {
-    const { scoreP1, scoreP2 } = this.state;
-    return (
-      <div className="P1-score">
-        {this.RenderScoreOfPlayer(scoreP1, scoreP2)}
-      </div>
-    );
-  }
+  return (
+    <div className="P1-score">
+      {RenderScoreOfPlayer([p1Score, p2Score])}
+    </div>
+  );
 }
 
 export default RenderPlayer1Score;

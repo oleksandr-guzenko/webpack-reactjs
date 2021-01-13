@@ -1,70 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
-import flagPath from '../img/SHAD.png';
+import flag from '../img/flags/default-flag.png';
 
-class RenderPlayer2Country extends Component {
-  constructor(props) {
-    super(props);
+function RenderPlayer2Country(props) {
+  const
+    [countryP1, updateCountryP1] = useState(''),
+    [countryP2, updateCountryP2] = useState(''),
+    [swapPlace, updateSwapPlace] = useState(true),
+    socket = io.connect(props.mode);
 
-    this.state = {
-      countryP1: '',
-      countryP2: '',
-      swap: true,
-      mode: props.mode
-    };
+  const renderCountryOfPlayer = (cP1, cP2) => {
+    if (swapPlace) {
+      if (cP2 === '' || cP2 === 'Player-2' || cP2 === undefined) {
+        return <img className="img-p2 default-flag" src={`${flag}`} alt="flag" />
+      }
+      return (
+        <img className="img-p2" src={`${cP2}`} alt="Country flag P2" />
+      )
+    }
+    else if (swapPlace === false) {
+      if (cP1 === '' || cP1 === 'Player-1' || cP1 === undefined) {
+        return <img className="img-p1 swaped" src={`${flag}`} alt="flag" />
+      }
+      return (
+        <img className="img-p1 swaped" src={`${cP1}`} alt="Country flag P1" />
+      )
+    }
   }
 
-  componentDidMount = () => {
-    const socket = io.connect(this.state.mode);
 
+  useEffect(() => {
     socket.on("swap-place", (swap) => {
-      this.setState({
-        swap: swap
-      })
-    })
-
-    socket.on("player2country", (country) => {
-      this.setState({
-        countryP2: country
-      })
+      updateSwapPlace(swap)
     })
 
     socket.on("player1country", (country) => {
-      this.setState({
-        countryP1: country
-      })
+      updateCountryP1(country)
     })
-  }
 
-  renderCountryOfPlayer = (countryP1, countryP2) => {
-    const { swap } = this.state;
-    if (swap) {
-      if (countryP2 === '' || countryP2 === 'Player-2' || countryP2 === undefined) {
-        return <img className="img-p2 xbox" src={flagPath} alt="flag" />
-      }
-      return (
-        <img className="img-p2" src={`${countryP2}`} alt="Country flag P2" />
-      )
-    }
-    else if (swap === false) {
-      if (countryP1 === "" || countryP1 === 'Player-1' || countryP1 === undefined) {
-        return <img className="img-p1 xbox swaped" src={flagPath} alt="flag" />
-      }
-      return (
-        <img className="img-p1 swaped" src={`${countryP1}`} alt="Country flag P1" />
-      )
-    }
-  }
+    socket.on("player2country", (country) => {
+      updateCountryP2(country)
+    })
+  }, []);
 
-
-  render() {
-    const { countryP1, countryP2 } = this.state;
-    return (
-      <div className="P2-country">
-        {this.renderCountryOfPlayer(countryP1, countryP2)}
-      </div>
-    );
-  }
+  return (
+    <div className="P2-country">
+      {/* <div className="shape hex"> */}
+        {renderCountryOfPlayer(countryP1, countryP2)}
+      {/* </div> */}
+    </div>
+  );
 }
 
 export default RenderPlayer2Country;
