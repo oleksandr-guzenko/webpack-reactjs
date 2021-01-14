@@ -24,6 +24,7 @@ function ScoreUpdater(props) {
 
   const ChangeValue = (e) => {
     setTimeout(() => {
+      console.log
       if (player === 'Player-1') {
         if (scoreP1 >= score) {
           updateDisablePlus(true);
