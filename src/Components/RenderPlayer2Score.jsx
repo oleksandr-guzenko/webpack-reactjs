@@ -25,24 +25,24 @@ function RenderPlayer2Score(props) {
   }, []);
 
 
-  const RenderScoreOfPlayer = (playersScore) => {
+  const RenderScoreOfPlayer = (p1,p2) => {
     if (swapPlace) {
-      if (playersScore[1] === '') {
+      if (p2 === '') {
         return <h3>0</h3>
       }
-      return <h3>{playersScore[1]}</h3>
+      return <h3>{p2}</h3>
     }
     else if (swapPlace === false) {
-      if (playersScore[0] === '') {
+      if (p1 === '') {
         return <h3>0</h3>
       }
-      return <h3>{playersScore[0]}</h3>
+      return <h3>{p1}</h3>
     }
   }
 
   return (
     <div className="P2-score">
-      {RenderScoreOfPlayer([p1Score, p2Score])}
+      {RenderScoreOfPlayer(p1Score, p2Score)}
     </div>
   );
 }
