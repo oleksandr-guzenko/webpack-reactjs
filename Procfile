@@ -1,1 +1,1 @@
-web: npm i && npm run live
+web: node server.js
