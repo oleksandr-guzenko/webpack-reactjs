@@ -25,7 +25,7 @@ function RenderPlayer2Score(props) {
   }, []);
 
 
-  const RenderScoreOfPlayer = (p1,p2) => {
+  const RenderScoreOfPlayer = (p1, p2) => {
     if (swapPlace) {
       if (p2 === '') {
         return <h3>0</h3>
