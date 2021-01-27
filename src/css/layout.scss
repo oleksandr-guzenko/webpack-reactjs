@@ -1,3 +1,25 @@
+@keyframes p1Score {
+  from {
+    opacity: 0;
+    left: 500px;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes p2Score {
+  from {
+    opacity: 0;
+    right: 500px;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+
 .layout {
   width: 1800px;
   margin: 0 auto;
@@ -25,7 +47,7 @@
     left: 50%;
     top: 50%;
     width: 540px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background: url("../img/shape.png") repeat;
     background-size: 25px;
     h3 {
@@ -117,5 +139,23 @@
       right: 120px;
       transform: skew(-55deg) translateY(-50%);
     }
+  }
+
+  .animation-time-P1 {
+    animation: p1Score 250ms;
+    left: 0;
+    opacity: 1;
+  }
+
+  .animation-time-P2 {
+    animation: p2Score 250ms;
+    right: 0;
+    opacity: 1;
+  }
+
+  .animation-time-P1,
+  .animation-time-P2 {
+    position: relative;
+  
   }
 }

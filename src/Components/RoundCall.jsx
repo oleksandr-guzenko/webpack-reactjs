@@ -13,7 +13,7 @@ function RoundCall(props) {
   
   const changeRoundTextHandler = (e) => {
     if (e.target.value === '') {
-      updateRoundText('');
+      updateRoundText('Demo text');
       updateRoundTextBoolean(false)
     }
     else {
