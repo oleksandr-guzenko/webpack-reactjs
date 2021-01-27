@@ -17,7 +17,6 @@ function App() {
   else {
     mode = process.env.HOST
   }
-  console.log(mode)
   return (
     <main className="loader">
       <Router>

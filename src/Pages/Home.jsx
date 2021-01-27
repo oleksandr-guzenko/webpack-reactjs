@@ -9,14 +9,10 @@ import RenderPlayer1Score from '../Components/RenderPlayer1Score';
 import RenderPlayer2Score from '../Components/RenderPlayer2Score';
 
 function Home(props) {
-  const socket = io.connect(props.mode),
-    [roundTextBoolean, updateRoundTextBoolean] = useState(false);
+
   useEffect(() => {
-    socket.on("roundCallText", ({roundText , roundTextBoolean }) => {
-      updateRoundTextBoolean(roundTextBoolean)
-    })
     document.title = 'Layout'
-  }, [roundTextBoolean]);
+  }, []);
 
   return (
     <div className="layout">
@@ -27,13 +23,13 @@ function Home(props) {
           <RenderPlayer1Score mode={props.mode} />
         </div>
       </div>
-      {roundTextBoolean &&
+     
         <div className="Rounds">
           <div className="overlay">
             <RenderRoundCall mode={props.mode} />
           </div>
         </div>
-      }
+      
 
       <div className="Player-2 skew">
         <div className="overlay">

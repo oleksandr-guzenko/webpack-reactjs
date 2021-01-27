@@ -59,9 +59,7 @@ function RenderPlayer2Country(props) {
 
   return (
     <div className="P2-country">
-      {/* <div className="shape hex"> */}
       {renderCountryOfPlayer(countryP1, countryP2)}
-      {/* </div> */}
     </div>
   );
 }

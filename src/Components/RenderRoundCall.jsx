@@ -7,11 +7,16 @@ function RenderRoundCall(props) {
     socket = io.connect(props.mode);
 
   useEffect(() => {
-    socket.on("roundCallText", ({roundText}) => {
-      updateRoundText(roundText)
+    socket.on("roundCallText", ({ roundText }) => {
+      if (roundText === '') {
+        updateRoundText('ft2')
+      }
+      else {
+        updateRoundText(roundText)
+      }
     })
   }, []);
-  
+
   return (
     <>
       <h3>{roundText}</h3>

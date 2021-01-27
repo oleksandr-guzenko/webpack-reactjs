@@ -48,13 +48,13 @@ function RenderPlayer1Score(props) {
   const RenderScoreOfPlayer = (p1, p2) => {
     if (swapPlace) {
       if (p1 === '') {
-        return <h3  class="test p1">0</h3>
+        return <h3>0</h3>
       }
-      return <h3 className={animationScoreP1}>{p1}</h3>
+      return <h3 className={`${animationScoreP1}`}>{p1}</h3>
     }
     else if (swapPlace === false) {
       if (p2 === '') {
-        return <h3 class="test p2">0</h3>
+        return <h3>0</h3>
       }
       return <h3 className={animationScoreP2}>{p2}</h3>
     }
