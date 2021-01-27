@@ -9,6 +9,17 @@
   }
 }
 
+@keyframes flagAnimation {
+  from {
+    opacity: 0;
+    top: -500px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
 @keyframes p2Score {
   from {
     opacity: 0;
@@ -153,9 +164,31 @@
     opacity: 1;
   }
 
+  .img-p1 {
+    opacity: 0;
+    &.animation-time-flag-P1 {
+      opacity: 1;
+    }
+  }
+
+  .img-p2 {
+    opacity: 0;
+    &.animation-time-flag-P2 {
+      opacity: 1;
+    }
+  }
+
+  .animation-time-flag-P1,
+  .animation-time-flag-P2 {
+    animation: flagAnimation 250ms;
+    opacity: 1;
+    top: 0;
+  }
+
   .animation-time-P1,
-  .animation-time-P2 {
+  .animation-time-P2,
+  .animation-time-flag-P1,
+  .animation-time-flag-P2 {
     position: relative;
-  
   }
 }
