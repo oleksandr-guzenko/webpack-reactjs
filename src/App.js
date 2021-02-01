@@ -7,7 +7,7 @@ import {
 import NoMatch from './Pages/NoMatch';
 import Home from './Pages/Home';
 import AdminPanel from './Pages/AdminPanel';
-
+import Login from './Pages/Login';
 function App() {
   const env = process.env.NODE_ENV;
   let mode;
@@ -24,15 +24,15 @@ function App() {
           <Route exact path="/">
             <Home mode={mode} />
           </Route>
-          <Route exact path="/admin/panel">
-            <AdminPanel mode={mode} />
+          <Route exact path="/dashboard">
+            <Login mode={mode} />
           </Route>
-          <Route exact path="/admin/panel/ft5">
-            <AdminPanel mode={mode} />
+          <Route exact path="/dashboard/ft5">
+            <Login mode={mode} />
           </Route>
-          <Route exact path="/admin/panel/ft10">
-            <AdminPanel mode={mode} />
-          </Route>
+          <Route exact path="/dashboard/ft10">
+            <Login mode={mode} />
+          </Route> */}
           <Route path="*">
             <NoMatch />
           </Route>

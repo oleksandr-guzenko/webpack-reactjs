@@ -60,7 +60,9 @@ module.exports = {
     new Webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.LOCALHOST": JSON.stringify('localhost:5100'),
-      "process.env.HOST": JSON.stringify('https://websocket-io-server.herokuapp.com/')
+      "process.env.HOST": JSON.stringify('https://websocket-io-server.herokuapp.com/'),
+      "process.env.USERNAME": JSON.stringify('admin'),
+      "process.env.PWRD": JSON.stringify('r7D-:jp~M_DhdD(%'),
     }),
   ],
   devServer: {

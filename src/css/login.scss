@@ -1,0 +1,105 @@
+@keyframes displayError {
+  from {
+    opacity: 0;
+    color: #fff;
+  }
+  to {
+    opacity: 1;
+    color: rgb(255, 0, 0);
+  }
+}
+
+@keyframes removeError {
+  from {
+    opacity: 1;
+    color: rgb(255, 0, 0);
+  }
+  to {
+    color: #fff;
+    opacity: 0;
+  }
+}
+
+.login-screen {
+  background: url("../img/shape.png") repeat;
+  background-size: 25px;
+  width: 500px;
+  margin: 20px auto;
+  color: #fff;
+  border: 3px solid #e3e3e3;
+
+  > .overlay {
+    height: 100%;
+    background: rgba(180, 145, 200, 0.5);
+  }
+
+  .title-header-container {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+    font-size: 35px;
+    color: #000;
+  }
+
+  .username-container,
+  .password-container,
+  .submit-container,
+  .error-container {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    input {
+      border: none;
+      width: 100%;
+      padding: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 1);
+      border-bottom: 1px solid rgba(0, 0, 0, 1);
+      border-right: 1px solid rgba(0, 0, 0, 1);
+      border-radius: 0;
+      border-left: none;
+    }
+    .frame {
+      background: rgba(180, 145, 200, 0.5);
+      padding: 10px 20px;
+      display: flex;
+      border-right: 0.5px inset rgba(0, 0, 0, 0.5);
+      border-top: 0.5px solid rgba(0, 0, 0, 0.5);
+      border-left: 0.5px solid rgba(0, 0, 0, 0.5);
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      .fa-lock,
+      .fa-user {
+        font-size: 20px;
+      }
+    }
+    .btn-submit {
+      padding: 10px;
+      text-align: center;
+      border: none;
+      background: rgba(180, 145, 200, 0.5);
+      width: 100%;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .error {
+      display: block;
+      text-align: center;
+      background: #fff;
+      &.hide {
+        opacity: 0;
+        animation: removeError 250ms;
+      }
+      &.show {
+        animation: displayError 250ms;
+      }
+      padding: 10px 0px;
+      border: 1px solid #000;
+      color: rgb(255, 0, 0);
+      opacity: 1;
+      width: 100%;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import io from "socket.io-client";
 function ScoreUpdater(props) {
 
@@ -12,10 +12,10 @@ function ScoreUpdater(props) {
     player = props.player;
 
   let score;
-  if (path === '/admin/panel/ft5') {
+  if (path === '/dashboard/ft5') {
     score = 5;
   }
-  else if (path === '/admin/panel/ft10') {
+  else if (path === '/dashboard/ft10') {
     score = 10;
   }
   else {

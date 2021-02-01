@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import io from "socket.io-client";
+import React, { useEffect } from 'react';
 import RenderRoundCall from '../Components/RenderRoundCall';
 import RenderPlayer1Name from '../Components/RenderPlayer1Name';
 import RenderPlayer2Name from '../Components/RenderPlayer2Name';
@@ -23,14 +22,11 @@ function Home(props) {
           <RenderPlayer1Score mode={props.mode} />
         </div>
       </div>
-     
-        <div className="Rounds">
-          <div className="overlay">
-            <RenderRoundCall mode={props.mode} />
-          </div>
+      <div className="Rounds">
+        <div className="overlay">
+          <RenderRoundCall mode={props.mode} />
         </div>
-      
-
+      </div>
       <div className="Player-2 skew">
         <div className="overlay">
           <RenderPlayer2Score mode={props.mode} />
