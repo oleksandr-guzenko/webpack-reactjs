@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Admin from '../Components/Admin';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 function Login(props) {
-  const
-    [username, updateUsername] = useState(''),
-    [password, updatePassword] = useState(''),
-    [displayError, updateDisplayError] = useState(false),
-    [logginAccepted, updateLogin] = useState(false),
-    cookies = new Cookies();
+  // const
+  //   [username, updateUsername] = useState(''),
+  //   [password, updatePassword] = useState(''),
+  //   [displayError, updateDisplayError] = useState(false),
+  //   [logginAccepted, updateLogin] = useState(false),
+  //   cookies = new Cookies();
   useEffect(() => {
     document.title = 'Login to dashboard'
     if (cookies.get('username') === 'admin') {
@@ -16,30 +16,29 @@ function Login(props) {
   }, []);
 
 
-  const redirect = () => {
+  // const redirect = () => {
+  //   if (password !== process.env.PWRD) {
+  //     updateDisplayError(true)
+  //     setTimeout(() => {
+  //       updateDisplayError(false);
+  //     }, 5000)
+  //   }
+  //   if (username !== process.env.USERNAME) {
+  //     updateDisplayError(true)
+  //     setTimeout(() => {
+  //       updateDisplayError(false);
+  //     }, 5000)
+  //   }
 
-    if (password !== process.env.PWRD) {
-      updateDisplayError(true)
-      setTimeout(() => {
-        updateDisplayError(false);
-      }, 5000)
-    }
-    if (username !== process.env.USERNAME) {
-      updateDisplayError(true)
-      setTimeout(() => {
-        updateDisplayError(false);
-      }, 5000)
-    }
-
-    if (username === process.env.USERNAME && password === process.env.PWRD) {
-      cookies.set('username', 'admin', { path: '/dashboard/', maxAge: 30 * 60 });
-      updateLogin(true)
-    }
-  }
+  //   if (username === process.env.USERNAME && password === process.env.PWRD) {
+  //     cookies.set('username', 'admin', { path: '/dashboard/', maxAge: 30 * 60 });
+  //     updateLogin(true)
+  //   }
+  // }
 
   return (
     <>
-      { !logginAccepted &&
+      {/* { !logginAccepted &&
         <div className="login-screen">
           <div className="overlay">
             <div className="title-header-container">
@@ -70,9 +69,9 @@ function Login(props) {
           </div>
         </div>
       }
-      { logginAccepted &&
+      { logginAccepted && */}
         <Admin mode={props.mode} />
-      }
+      {/* } */}
     </>
   );
 }

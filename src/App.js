@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import NoMatch from './Pages/NoMatch';
 import Home from './Pages/Home';
-import AdminPanel from './Pages/AdminPanel';
 import Login from './Pages/Login';
 function App() {
   const env = process.env.NODE_ENV;
@@ -32,7 +31,7 @@ function App() {
           </Route>
           <Route exact path="/dashboard/ft10">
             <Login mode={mode} />
-          </Route> */}
+          </Route>
           <Route path="*">
             <NoMatch />
           </Route>
