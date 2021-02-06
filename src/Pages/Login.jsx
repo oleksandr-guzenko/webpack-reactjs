@@ -10,9 +10,9 @@ function Login(props) {
   //   cookies = new Cookies();
   useEffect(() => {
     document.title = 'Login to dashboard'
-    if (cookies.get('username') === 'admin') {
-      updateLogin(true)
-    }
+    // if (cookies.get('username') === 'admin') {
+    //   updateLogin(true)
+    // }
   }, []);
 
 
